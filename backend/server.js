@@ -1,6 +1,7 @@
 import express from "express";
 import { config } from "dotenv";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 //importing database
 import database from "./database/database.js";
@@ -21,6 +22,15 @@ app.use(
   })
 );
 app.use(cookieParser());
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true, // You may need this if your frontend sends credentials (e.g., cookies)
+  })
+);
 
 // test route
 app.get("/", (req, res) => {

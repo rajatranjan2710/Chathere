@@ -5,7 +5,7 @@ import generateToken from "../utils/generateToken.js";
 // sign up
 export const signUp = async (req, res) => {
   // res.send("Sign up Please!!!");
-  const { fullName, username, password, confirmPassword, gender } = req.body;
+  const { fullName, userName, password, confirmPassword, gender } = req.body;
 
   // Validation of password
   if (password !== confirmPassword) {
@@ -20,7 +20,7 @@ export const signUp = async (req, res) => {
 
   try {
     // finding if the user exist
-    const user = await User.findOne({ userName: username });
+    const user = await User.findOne({ userName });
 
     // if user exists
     if (user) {
@@ -33,7 +33,7 @@ export const signUp = async (req, res) => {
 
     const newUser = new User({
       fullName,
-      userName: username,
+      userName,
       password: hashPassword,
       gender,
       profilepic,
@@ -41,7 +41,7 @@ export const signUp = async (req, res) => {
 
     await newUser.save();
 
-    generateToken(newUser._id, res);
+    const cookie = generateToken(newUser._id, res);
 
     res.status(201).json({
       message: "User created successfully",
@@ -49,6 +49,7 @@ export const signUp = async (req, res) => {
       username: newUser.userName,
       fullName: newUser.fullName,
       profilepic: newUser.profilepic,
+      cookie: cookie,
     });
   } catch (error) {
     console.log("Error in signup controller", error);
@@ -60,13 +61,21 @@ export const signUp = async (req, res) => {
 
 //login
 export const login = async (req, res) => {
-  const { username, password } = req.body;
+  console.log("login route hit");
+
+  const { userName, password } = req.body;
 
   try {
-    const user = await User.findOne({ userName: username });
-
-    if (!user) {
-      return res.status(404).json({
+    // res.status(201).json({
+    //   message: "recieved",
+    // });
+    const user = await User.findOne({ userName });
+    // console.log(user);
+    console.log("try is working in login");
+    // console.log("user database - ", user);
+    if (user === null || !user) {
+      console.log("its null");
+      return res.status(500).json({
         error: "User Does not exist please created an account",
       });
     } else {
@@ -83,10 +92,16 @@ export const login = async (req, res) => {
         res.status(201).json({
           message: "User logged in successfull",
           cookie,
+          _id: user._id,
+          username: user.userName,
+          fullName: user.fullName,
+          profilepic: user.profilepic,
         });
       }
     }
+    // console.log(res);
   } catch (error) {
+    // }
     console.log("Error in login controller", error);
     res.status(500).json({
       error: "Internal Server error",
@@ -97,6 +112,9 @@ export const login = async (req, res) => {
 //logout
 export const logout = (req, res) => {
   try {
+    // console.log(req.cookie);
+
+    // console.log(res);
     res.cookie("jwt", "", { maxAge: 0 });
     res.status(200).json({
       message: "Logged out Succesfully",

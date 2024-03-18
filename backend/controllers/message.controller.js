@@ -2,7 +2,8 @@ import Conversation from "../models/Conversation.model.js";
 import Message from "../models/message.model.js";
 
 export const sendmessage = async (req, res) => {
-  console.log("message sent");
+  // console.log("message sent");
+  console.log("reaching send message api");
 
   try {
     const { message } = req.body;
@@ -43,7 +44,7 @@ export const sendmessage = async (req, res) => {
       newMessage,
     });
   } catch (error) {
-    console.log("Error in sendmessage controller      ", error.message);
+    console.log("Error in sendmessage controller");
     res.status(500).json({
       error: "Internal Server Error",
     });
@@ -54,20 +55,27 @@ export const getchat = async (req, res) => {
   const { id: getchatof } = req.params;
   const sender = req.user._id;
 
-  const conversations = await Conversation.find({
-    participants: { $all: [sender, getchatof] },
-  }).populate("messages");
+  try {
+    const conversations = await Conversation.find({
+      participants: { $all: [sender, getchatof] },
+    }).populate("messages");
 
-  console.log(conversations);
+    // console.log(conversations);
 
-  if (!conversations) {
-    return res.status(200).json({
-      message: "No conversations yet",
+    if (!conversations) {
+      return res.status(200).json({
+        message: "No conversations yet",
+      });
+    }
+
+    res.status(201).json({
+      message: "data fetched",
+      conversations,
+    });
+  } catch (error) {
+    console.log("Error in getchat controller", error.message);
+    res.status(500).json({
+      error: "Internal Server Error",
     });
   }
-
-  res.status(201).json({
-    message: "data fetched",
-    conversations,
-  });
 };
