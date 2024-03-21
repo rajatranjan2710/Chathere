@@ -30,7 +30,7 @@ const useSignUp = () => {
       // if (response.data.error) {
       //   throw new Error(response.data.error);
       // }
-      dispatch(addUser(response.data));
+      dispatch(addUser(JSON.stringify(response.data)));
 
       localStorage.setItem("user", JSON.stringify(response.data));
       //Here i wanna change the state of user to the data we recieved

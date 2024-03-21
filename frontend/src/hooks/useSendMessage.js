@@ -15,7 +15,7 @@ const useSendMessage = () => {
       return;
     }
 
-    console.log("In useSendMessage ", message);
+    // console.log("In useSendMessage ", message);
     setLoading(true);
     try {
       //getting token
@@ -50,7 +50,7 @@ const useSendMessage = () => {
       const messageSent = data.newMessage;
       dispatch(updatedMessageOnSend(messageSent));
 
-      console.log("response", messageSent);
+      // console.log("response", messageSent);
     } catch (error) {
       toast.error(error.message);
     } finally {

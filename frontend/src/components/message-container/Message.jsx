@@ -1,5 +1,4 @@
 import React from "react";
-import gojo1 from "../../assets/gojo1.png";
 import { useSelector } from "react-redux";
 
 const Message = ({ item }) => {

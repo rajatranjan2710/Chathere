@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import toast from "react-hot-toast";
 import { IoSend } from "react-icons/io5";
 import useSendMessage from "../../hooks/useSendMessage";
 import { Rings } from "react-loader-spinner";

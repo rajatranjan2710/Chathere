@@ -1,6 +1,7 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
 export const updateConversation = createAction("UPDATE_CONVERSATION");
+export const updateNotificationCount = createAction("UPDATE_CONVO_ON_NOTI");
 export const updatedSelecctedConversation = createAction(
   "UPDATED_SELECTED_CONVERSATION"
 );
@@ -13,6 +14,7 @@ export const updatedMessageOnSend = createAction("UPDATE_MESSAGE_ONSEND");
 const initialState = {
   conversations: [],
   messages: [],
+  notificationsCount: {},
   selectedConversation: null,
 };
 
@@ -21,6 +23,12 @@ export const conversationsReducer = createReducer(initialState, (builder) => {
     .addCase(updateConversation, (state, action) => {
       state.conversations = action.payload.filteredusers;
       // console.log("New state is ", state.conversations);
+    })
+
+    //updating conversation array when there is notification
+    .addCase(updateNotificationCount, (state, action) => {
+      state.notifications = action.payload;
+      // console.log("new state of notification : ", state.notificationsCount);
     })
 
     //updating the selected conversation
@@ -44,7 +52,7 @@ export const conversationsReducer = createReducer(initialState, (builder) => {
     //updating message array whenever we send a message
     .addCase(updatedMessageOnSend, (state, action) => {
       state.messages = [...state.messages, action.payload];
-      console.log(state.messages);
+      // console.log(state.messages);
     })
 
     // deleted selected conversation on logout

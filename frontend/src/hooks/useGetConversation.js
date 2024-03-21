@@ -21,6 +21,7 @@ const useGetConversations = () => {
 
   const scrollToBottom = () => {
     if (messagesEndRef.current) {
+      // console.log("scroll to bottom");
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
@@ -65,6 +66,12 @@ const useGetConversations = () => {
       // You can perform cleanup tasks here if necessary
     };
   }, [selectedConversation, jwtToken, dispatch]);
+
+  useEffect(() => {
+    if (!loading) {
+      scrollToBottom();
+    }
+  }, [loading]);
 
   return { loading, messagesEndRef, scrollToBottom };
 };

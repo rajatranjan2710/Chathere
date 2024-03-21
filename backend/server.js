@@ -2,12 +2,13 @@ import express from "express";
 import { config } from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import { app, server } from "./socket/socket.js";
 
 //importing database
 import database from "./database/database.js";
 
 //express app
-const app = express();
+// const ap = express();
 
 // dotenv configuration
 config("./.env");
@@ -38,7 +39,7 @@ app.get("/", (req, res) => {
 });
 
 // server start
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`server connected on ${PORT}`);
 });
 

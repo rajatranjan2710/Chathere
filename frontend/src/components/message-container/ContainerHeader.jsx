@@ -1,6 +1,5 @@
 import React from "react";
 import "../../styles/messageContainer.scss";
-import img1 from "../../assets/img1.jpg";
 import { useSelector } from "react-redux";
 
 const ContainerHeader = () => {

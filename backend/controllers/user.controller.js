@@ -1,9 +1,9 @@
 import { User } from "../models/user.model.js";
 
 export const getusers = async (req, res) => {
-  console.log("hitting this api");
+  // console.log("hitting this api");
   try {
-    console.log("code here");
+    // console.log("code here");
 
     const loggedInUser = req.user._id;
     if (!loggedInUser) {

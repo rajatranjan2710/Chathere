@@ -9,12 +9,29 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { addUser, deleteUser } from "./redux/reducers/authReducer";
 // import { useEffect, useState } from "react";
 
 function App() {
-  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
+  const newUser = localStorage.getItem("user") || null;
+
+  useEffect(() => {
+    console.log("app moutning user state is changing");
+    dispatch(addUser(newUser));
+    // console.log("new user : ", newUser);
+
+    return () => {
+      console.log("App Component unmounted");
+      dispatch(deleteUser());
+    };
+  }, [newUser]);
+
+  const { user } = useSelector((state) => state.auth);
+  // console.log("user use selector :", user);
   // const navigate = useNavigate();
   return (
     // <Toaster>

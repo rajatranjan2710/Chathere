@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { server } from "../redux/store";
 import toast from "react-hot-toast";
-import { addUser } from "../redux/reducers/authReducer";
+import { addUser, setLoggedIn } from "../redux/reducers/authReducer";
 import { useDispatch } from "react-redux";
 import { setProfileDefault } from "../redux/reducers/utilReducer";
 
@@ -28,6 +28,7 @@ const useLogin = () => {
       localStorage.setItem("user", JSON.stringify(data));
       dispatch(addUser(JSON.stringify(data)));
       dispatch(setProfileDefault());
+      dispatch(setLoggedIn());
     } catch (error) {
       toast.error(error.response.data.error);
     } finally {

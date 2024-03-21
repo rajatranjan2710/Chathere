@@ -13,8 +13,8 @@ const Login = () => {
   const { loading, login } = useLogin();
 
   const handleChange = (e) => {
-    console.log("working");
-    console.log(formData);
+    // console.log("working");
+    // console.log(formData);
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 

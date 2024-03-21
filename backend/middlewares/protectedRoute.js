@@ -9,7 +9,7 @@ export const protectedRoute = async (req, res, next) => {
     if (authHeader) {
       const token = authHeader.split(" ")[1];
 
-      console.log("Bearer token cookie : ", token);
+      // console.log("Bearer token cookie : ", token);
       // console.log(token);
 
       if (!token) {
@@ -37,7 +37,7 @@ export const protectedRoute = async (req, res, next) => {
       }
 
       req.user = user;
-      console.log("user varified");
+      // console.log("user varified");
       next();
     } else {
       console.log("Header is not found");

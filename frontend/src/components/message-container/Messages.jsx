@@ -3,19 +3,21 @@ import Message from "./Message";
 import useGetConversations from "../../hooks/useGetConversation";
 import { useSelector } from "react-redux";
 import { Rings } from "react-loader-spinner";
+import useListenMessage from "../../hooks/useListenMessage";
 
 const Messages = () => {
   const { loading, messagesEndRef, scrollToBottom } = useGetConversations();
 
-  // const messagesEndRef = useRef(null);
   const { messages } = useSelector((state) => state.conversations);
+  useListenMessage();
 
   //To scroll when there is new message
   useEffect(() => {
+    // console.log("running in useffect of messages");
     setTimeout(() => {
       scrollToBottom();
     }, 100);
-  }, [messages, scrollToBottom]);
+  }, [messages]);
 
   return (
     <div className="messages">

@@ -9,7 +9,7 @@ const Profile = () => {
 
   const profileOpenHandler = () => {
     toast.success("Clicked");
-    console.log("clicked");
+    // console.log("clicked");
     dispatch(setProfileOpen());
   };
 

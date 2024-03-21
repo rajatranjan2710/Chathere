@@ -1,9 +1,10 @@
 import Conversation from "../models/Conversation.model.js";
 import Message from "../models/message.model.js";
+import { getRecieverSocket, io } from "../socket/socket.js";
 
 export const sendmessage = async (req, res) => {
   // console.log("message sent");
-  console.log("reaching send message api");
+  // console.log("reaching send message api");
 
   try {
     const { message } = req.body;
@@ -39,6 +40,15 @@ export const sendmessage = async (req, res) => {
     await conversations.save();
     await newMessage.save();
     // await conversations.save();
+
+    // implementing socket.io
+
+    const recieverSocketId = getRecieverSocket(recieverId);
+    console.log("reciver socket id: ", recieverSocketId);
+    if (recieverSocketId) {
+      io.to(recieverSocketId).emit("message", newMessage);
+      console.log("emitted");
+    }
 
     res.status(201).json({
       newMessage,

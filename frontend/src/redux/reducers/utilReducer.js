@@ -11,7 +11,7 @@ export const utilReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setProfileOpen, (state) => {
       state.isProfileOpen = !state.isProfileOpen;
-      console.log(state.isProfileOpen);
+      // console.log(state.isProfileOpen);
     })
     .addCase(setProfileDefault, (state) => {
       state.isProfileOpen = false;
