@@ -28,7 +28,9 @@ const useConversations = () => {
           },
         });
         const data = response.data;
+        console.log(data);
         dispatch(updateConversation(data));
+        console.log("dispatched");
 
         if (data.error) {
           throw new Error(data.error);

@@ -22,6 +22,7 @@ export const conversationsReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(updateConversation, (state, action) => {
       state.conversations = action.payload.filteredusers;
+      console.log("here is state of conversations : ", state.conversations);
     })
 
     //updating conversation array when there is notification
