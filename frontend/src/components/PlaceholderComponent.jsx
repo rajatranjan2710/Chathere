@@ -1,6 +1,10 @@
 import React from "react";
+// import useListenMessage from "../hooks/useListenMessage";
 
 const PlaceholderComponent = () => {
+  // console.log("useListen working in placeholder component");
+  // useListenMessage();
+
   return (
     <div
       style={{

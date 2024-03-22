@@ -20,19 +20,15 @@ function App() {
   const newUser = localStorage.getItem("user") || null;
 
   useEffect(() => {
-    console.log("app moutning user state is changing");
     dispatch(addUser(newUser));
-    // console.log("new user : ", newUser);
 
     return () => {
-      console.log("App Component unmounted");
       dispatch(deleteUser());
     };
   }, [newUser]);
 
   const { user } = useSelector((state) => state.auth);
-  // console.log("user use selector :", user);
-  // const navigate = useNavigate();
+
   return (
     // <Toaster>
     <div className="App">

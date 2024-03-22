@@ -3,10 +3,13 @@ import { createAction, createReducer } from "@reduxjs/toolkit";
 export const setSocketData = createAction("socket/setSocket");
 export const setOnlineUsers = createAction("socket/setOnlineUsers");
 export const clearSocket = createAction("socket/clearSocket");
+export const isHomeMounted = createAction("socket/isHomeMounted");
 
 const initialState = {
   onlineUsers: [],
   socketData: null,
+  notificationMessage: [],
+  isHomeMounted: false,
 };
 
 export const socketReducer = createReducer(initialState, (builder) => {
@@ -14,7 +17,6 @@ export const socketReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setSocketData, (state, action) => {
       state.socketData = action.payload;
-      console.log("new state : ", state.socketData);
     })
 
     .addCase(clearSocket, (state) => {
@@ -25,6 +27,9 @@ export const socketReducer = createReducer(initialState, (builder) => {
     //setting online users
     .addCase(setOnlineUsers, (state, action) => {
       state.onlineUsers = action.payload;
-      console.log("new state is :", state.onlineUsers);
+    })
+
+    .addCase(isHomeMounted, (state) => {
+      state.isHomeMounted = !state.isHomeMounted;
     });
 });

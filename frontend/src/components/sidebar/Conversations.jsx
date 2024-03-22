@@ -7,6 +7,7 @@ import { updatedSelecctedConversation } from "../../redux/reducers/conversations
 const Conversations = ({ item }) => {
   const dispatch = useDispatch();
   const { onlineUsers } = useSelector((state) => state.socket);
+
   // if the online users include the props.item._id their online status is true
   const isOnline = onlineUsers.includes(item._id);
 
@@ -21,9 +22,9 @@ const Conversations = ({ item }) => {
     selectedConversation && selectedConversation._id === item._id;
 
   const clickHandler = (_id) => {
-    console.log("clicked");
-    toast.success("CLicked");
-    console.log(_id);
+    // console.log("clicked");
+    // toast.success("CLicked");
+    // console.log(_id);
     dispatch(updatedSelecctedConversation(_id));
   };
 

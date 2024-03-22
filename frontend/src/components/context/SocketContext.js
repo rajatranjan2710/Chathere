@@ -12,6 +12,7 @@ export const SocketContextProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   const { user } = useSelector((state) => state.auth);
+  // const user = localStorage.getItem("user");
 
   const newUser = user ? JSON.parse(user) : null;
 
@@ -19,9 +20,9 @@ export const SocketContextProvider = ({ children }) => {
     // console.log(newUser);
     // console.log("in socket context", newUser?._id || null);
     if (newUser) {
-      console.log("user in scoket context ", user);
+      // console.log("user in scoket context ", user);
       if (socket == null) {
-        console.log("socket is intializing");
+        // console.log("socket is intializing");
         const newSocket = io("http://localhost:8080", {
           query: {
             userId: newUser._id,
@@ -39,7 +40,7 @@ export const SocketContextProvider = ({ children }) => {
         };
       }
     } else {
-      console.log("user is now logged out");
+      // console.log("user is now logged out");
       if (socket != null) {
         socket.close();
         setSocket(null);
@@ -47,7 +48,7 @@ export const SocketContextProvider = ({ children }) => {
     }
   }, [user]);
 
-  console.log(socket);
+  // console.log(socket);
 
   return (
     <SocketContext.Provider value={{ socket }}>

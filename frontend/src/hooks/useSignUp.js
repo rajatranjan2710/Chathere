@@ -3,14 +3,13 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { server } from "../redux/store";
 import { useDispatch } from "react-redux";
-import { addUser } from "../redux/reducers/authReducer";
+import { useNavigate } from "react-router-dom";
 
 const useSignUp = () => {
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const signUplol = async (formData) => {
-    // console.log("at signup lol");
     const success = ValidDate(formData);
     console.log(success);
     if (!success) {
@@ -27,13 +26,9 @@ const useSignUp = () => {
       });
 
       console.log(response.data);
-      // if (response.data.error) {
-      //   throw new Error(response.data.error);
-      // }
-      dispatch(addUser(JSON.stringify(response.data)));
+      toast.success(response.data.message);
 
-      localStorage.setItem("user", JSON.stringify(response.data));
-      //Here i wanna change the state of user to the data we recieved
+      navigate("/home");
     } catch (error) {
       console.log(error);
       console.log(error.response.data.error);
