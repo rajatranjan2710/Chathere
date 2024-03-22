@@ -23,7 +23,7 @@ export const SocketContextProvider = ({ children }) => {
       // console.log("user in scoket context ", user);
       if (socket == null) {
         // console.log("socket is intializing");
-        const newSocket = io("http://localhost:8080", {
+        const newSocket = io("https://chatchit-mocha.vercel.app", {
           query: {
             userId: newUser._id,
             userName: newUser.fullName,
