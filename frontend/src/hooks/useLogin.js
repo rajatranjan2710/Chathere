@@ -18,11 +18,12 @@ const useLogin = () => {
         return;
       }
 
-      const response = await axios.post(`${server}/login`, formData, {
+      const response = await axios.post(`api/v1/login`, formData, {
         withCredentials: true,
       });
 
       const data = response.data;
+      console.log(response.data);
       toast.success(data.message);
 
       localStorage.setItem("user", JSON.stringify(data));
