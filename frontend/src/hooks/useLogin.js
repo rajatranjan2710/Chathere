@@ -18,7 +18,7 @@ const useLogin = () => {
         return;
       }
 
-      const response = await axios.post(`${server}/api/v1/login`, formData, {
+      const response = await axios.post(`${server}/login`, formData, {
         withCredentials: true,
       });
 

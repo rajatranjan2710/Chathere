@@ -15,4 +15,4 @@ const store = configureStore({
 
 export default store;
 
-export const server = `https://chatchit-mocha.vercel.app/api/v1`;
+export const server = `https://chitchat-redep.vercel.app/api/v1`;
