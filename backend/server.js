@@ -30,7 +30,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "https://chatchit-mocha.vercel.app",
+    origin: process.env.FRONT_END_URL,
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true, // You may need this if your frontend sends credentials (e.g., cookies)
