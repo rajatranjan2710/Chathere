@@ -46,6 +46,10 @@ app.use("/api/v1", messageRouter);
 app.use("/api/v1", AuthRouter);
 app.use("/api/v1", userRouter);
 
+app.get("/hello", (req, res) => {
+  res.send("Working!!!");
+});
+
 app.use(express.static(path.join(__dirname, "/frontend/build")));
 //for any other route
 app.get("*", (req, res) => {
@@ -53,9 +57,6 @@ app.get("*", (req, res) => {
 });
 
 // test route
-app.get("/", (req, res) => {
-  res.send("Working!!!");
-});
 
 // server start
 server.listen(PORT, () => {
